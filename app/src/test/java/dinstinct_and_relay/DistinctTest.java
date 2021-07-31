@@ -20,10 +20,12 @@ public class DistinctTest {
 
 
     TestObserver<String> distinct = drive().withLatestFrom(slaveDistinctUntilChanged(), this::merge).test();
+
+    //This will also NOT break the unit test
+    slaveStream.accept(1);
+
     TestObserver<String> raw = drive().withLatestFrom(slave(), this::merge).test();
 
-    //This will NOT break the unit test
-    slaveStream.accept(1);
 
     raw.assertNoErrors();
     distinct.assertNoErrors();
