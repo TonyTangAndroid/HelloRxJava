@@ -13,16 +13,17 @@ public class DistinctTest {
   private final Relay<String> driveRelay = PublishRelay.create();
   private final Relay<Integer> slaveRelay = PublishRelay.create();
 
-  @Test(expected = AssertionError.class)
+  @Test
   public void addition_isCorrect() {
     assertThat(2 + 2).isEqualTo(4);
 
+
+    TestObserver<String> distinct = drive().withLatestFrom(slaveDistinctUntilChanged(), this::merge).test();
     TestObserver<String> raw = drive().withLatestFrom(slave(), this::merge).test();
-    //This will NOT break the unit test because there is ongoing subscription.
+
+    //This will NOT break the unit test
     slaveRelay.accept(1);
 
-    TestObserver<String> distinct = drive().withLatestFrom(slaveDistinctUntilChanged(), this::merge)
-        .test();
 
     raw.assertNoErrors();
     distinct.assertNoErrors();
