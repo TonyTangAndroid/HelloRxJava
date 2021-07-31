@@ -2,7 +2,6 @@ package dinstinct_and_relay;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.jakewharton.rxrelay2.BehaviorRelay;
 import com.jakewharton.rxrelay2.PublishRelay;
 import com.jakewharton.rxrelay2.Relay;
 import io.reactivex.Observable;
@@ -12,7 +11,7 @@ import org.junit.Test;
 public class DistinctTest {
 
   private final Relay<String> driveRelay = PublishRelay.create();
-  private final Relay<Integer> slaveRelay = BehaviorRelay.createDefault(0);
+  private final Relay<Integer> slaveRelay = PublishRelay.create();
 
   @Test
   public void addition_isCorrect() {
@@ -55,7 +54,7 @@ public class DistinctTest {
   }
 
   public Observable<Integer> slave() {
-    return slaveRelay.hide();
+    return slaveRelay.hide().replay(1).refCount();
   }
 
   public Observable<Integer> slaveDistinctUntilChanged() {
