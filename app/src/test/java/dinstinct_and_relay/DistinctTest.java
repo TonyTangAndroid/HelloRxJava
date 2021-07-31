@@ -9,12 +9,13 @@ import io.reactivex.observers.TestObserver;
 import org.junit.Test;
 
 public class DistinctTest {
+  private final SlaveStream slaveStream = new SlaveStream();
 
   private final Relay<String> driveRelay = PublishRelay.create();
-  private final Relay<Integer> slaveRelay = PublishRelay.create();
 
   @Test
   public void addition_isCorrect() {
+
     assertThat(2 + 2).isEqualTo(4);
 
 
@@ -22,8 +23,7 @@ public class DistinctTest {
     TestObserver<String> raw = drive().withLatestFrom(slave(), this::merge).test();
 
     //This will NOT break the unit test
-    slaveRelay.accept(1);
-
+    slaveStream.accept(1);
 
     raw.assertNoErrors();
     distinct.assertNoErrors();
@@ -52,12 +52,12 @@ public class DistinctTest {
   }
 
 
-  public Observable<String> drive() {
+  private Observable<String> drive() {
     return driveRelay.hide();
   }
 
-  public Observable<Integer> slave() {
-    return slaveRelay.hide().replay(1).refCount();
+  private Observable<Integer> slave() {
+    return slaveStream.slave();
   }
 
   public Observable<Integer> slaveDistinctUntilChanged() {
