@@ -50,8 +50,8 @@ public class CityRepoTest {
     @Test
     public void method2_minimum() {
 
-        //method 3
-        CityRepo.listing().test().assertValueAt(0, Arrays.asList(new CityEntity(1, "Seattlex"), new CityEntity(2, "SFO")));
+        //method 3 test on website
+        CityRepo.listing().test().assertValueAt(0, Arrays.asList(new CityEntity(1, "Seattle"), new CityEntity(2, "SFO")));
 
     }
 }
