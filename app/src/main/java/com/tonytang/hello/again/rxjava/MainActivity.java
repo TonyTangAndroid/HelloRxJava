@@ -3,6 +3,7 @@ package com.tonytang.hello.again.rxjava;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import learning.parallel.LearningParallelFragment;
 import learning.throttle_first.LearningThrottleFirstFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     getSupportFragmentManager().beginTransaction().replace(R.id.container,
-            LearningThrottleFirstFragment.newInstance())
+            LearningParallelFragment.newInstance())
         .commitNow();
   }
 

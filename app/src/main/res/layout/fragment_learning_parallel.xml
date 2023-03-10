@@ -17,7 +17,6 @@
       android:id="@+id/btn_resolve_parallel"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:enabled="false"
       android:text="@string/resolve_parallel" />
 
     <TextView
@@ -39,7 +38,6 @@
       android:id="@+id/btn_resolve_in_sequence"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:enabled="false"
       android:text="@string/resolve_in_sequence" />
 
     <TextView

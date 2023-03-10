@@ -29,6 +29,10 @@ android {
 }
 
 dependencies {
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.1.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.1.0'
+
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.1'
     implementation 'com.uber.autodispose:autodispose:1.4.0'
     implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.4.0'
@@ -42,6 +46,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    testImplementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    testAnnotationProcessor 'org.apache.logging.log4j:log4j-core:2.20.0'
     testImplementation 'org.apache.logging.log4j:log4j-api:2.20.0'
 }
