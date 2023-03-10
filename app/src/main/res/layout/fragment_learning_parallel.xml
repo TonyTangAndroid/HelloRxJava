@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="16dp"
+  tools:context=".MainActivity">
+
+  <LinearLayout
+    android:id="@+id/ll_resolve_parallel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/btn_resolve_parallel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:enabled="false"
+      android:text="@string/resolve_parallel" />
+
+    <TextView
+      android:id="@+id/tv_cost_time_parallel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_weight="1" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/ll_resolve_in_sequence"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/btn_resolve_in_sequence"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:enabled="false"
+      android:text="@string/resolve_in_sequence" />
+
+    <TextView
+      android:id="@+id/tv_cost_time_in_sequence"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_weight="1" />
+
+  </LinearLayout>
+</LinearLayout>

@@ -7,7 +7,7 @@
   android:padding="16dp"
   tools:context=".MainActivity">
 
-  <androidx.appcompat.widget.AppCompatButton
+  <TextView
     android:id="@+id/tv_throttle_first"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

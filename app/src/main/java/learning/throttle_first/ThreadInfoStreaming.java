@@ -1,5 +1,7 @@
-package com.tonytang.hello.again.rxjava;
+package learning.throttle_first;
 
+import com.tonytang.hello.again.rxjava.Source;
+import com.tonytang.hello.again.rxjava.ThreadInfo;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +11,7 @@ public class ThreadInfoStreaming {
   private ThreadInfoStreaming() {
   }
 
-  static Observable<ThreadInfo> eventStreaming() {
+  public static Observable<ThreadInfo> eventStreaming() {
     return Observable.merge(throttleFirst(), throttleLast());
   }
 
