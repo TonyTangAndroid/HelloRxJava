@@ -1,4 +1,4 @@
-package concurreny;
+package learning.parallel;
 
 public class Person {
 
