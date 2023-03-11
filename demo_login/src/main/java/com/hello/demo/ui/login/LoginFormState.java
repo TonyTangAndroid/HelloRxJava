@@ -2,15 +2,11 @@ package com.hello.demo.ui.login;
 
 import androidx.annotation.Nullable;
 
-/**
- * Data validation state of the login form.
- */
+/** Data validation state of the login form. */
 class LoginFormState {
 
-  @Nullable
-  private Integer usernameError;
-  @Nullable
-  private Integer passwordError;
+  @Nullable private Integer usernameError;
+  @Nullable private Integer passwordError;
   private boolean isDataValid;
 
   LoginFormState(@Nullable Integer usernameError, @Nullable Integer passwordError) {

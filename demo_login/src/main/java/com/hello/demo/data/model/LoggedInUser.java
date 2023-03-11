@@ -1,8 +1,6 @@
 package com.hello.demo.data.model;
 
-/**
- * Data class that captures user information for logged in users retrieved from LoginRepository
- */
+/** Data class that captures user information for logged in users retrieved from LoginRepository */
 public class LoggedInUser {
 
   private String userId;

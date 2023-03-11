@@ -4,11 +4,10 @@ import io.reactivex.Single;
 
 public class PersonRepo {
 
-  private PersonRepo() {
-  }
+  private PersonRepo() {}
 
-  public static Single<Person> asyncResolve(String uuid){
-   return Single.fromCallable(() -> asyncResolveInternal(uuid));
+  public static Single<Person> asyncResolve(String uuid) {
+    return Single.fromCallable(() -> asyncResolveInternal(uuid));
   }
 
   private static Person asyncResolveInternal(String uuid) throws InterruptedException {

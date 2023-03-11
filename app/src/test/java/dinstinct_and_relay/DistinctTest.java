@@ -18,16 +18,15 @@ public class DistinctTest {
 
     assertThat(2 + 2).isEqualTo(4);
 
+    TestObserver<String> distinct =
+        drive().withLatestFrom(slaveDistinctUntilChanged(), this::merge).test();
 
-    TestObserver<String> distinct = drive().withLatestFrom(slaveDistinctUntilChanged(), this::merge).test();
-
-    //This will break the unit test as the initial subscriber disposed.
+    // This will break the unit test as the initial subscriber disposed.
     distinct.dispose();
     slaveStream.accept(1);
 
     distinct = drive().withLatestFrom(slaveDistinctUntilChanged(), this::merge).test();
     TestObserver<String> raw = drive().withLatestFrom(slave(), this::merge).test();
-
 
     raw.assertNoErrors();
     distinct.assertNoErrors();
@@ -48,13 +47,11 @@ public class DistinctTest {
     distinct.assertValueCount(2);
     raw.assertValues("tony:1", "tommy:1");
     distinct.assertValues("tony:1", "tommy:1");
-
   }
 
   private String merge(String drive, int slave) {
     return drive + ":" + slave;
   }
-
 
   private Observable<String> drive() {
     return driveRelay.hide();
@@ -67,5 +64,4 @@ public class DistinctTest {
   public Observable<Integer> slaveDistinctUntilChanged() {
     return slave().filter(index -> index % 2 == 1).distinctUntilChanged();
   }
-
 }

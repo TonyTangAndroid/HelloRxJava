@@ -2,8 +2,6 @@ package com.tonytang.hello.again.rxjava;
 
 import java.util.Objects;
 
-import io.reactivex.Observable;
-
 public class CityEntity {
 
   public final int id;

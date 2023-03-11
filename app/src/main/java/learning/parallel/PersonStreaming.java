@@ -7,13 +7,15 @@ import java.util.UUID;
 
 public class PersonStreaming {
 
-  private PersonStreaming() {
-  }
+  private PersonStreaming() {}
 
   public static Single<ResolveResult> resolve(ResolveAction action) {
-    return flowable(action).toList().map(
-        list -> new ResolveResult(new Span(action.startTime, System.currentTimeMillis()),
-            action.type, list));
+    return flowable(action)
+        .toList()
+        .map(
+            list ->
+                new ResolveResult(
+                    new Span(action.startTime, System.currentTimeMillis()), action.type, list));
   }
 
   private static Flowable<Person> flowable(ResolveAction action) {
@@ -21,9 +23,7 @@ public class PersonStreaming {
   }
 
   private static Flowable<Person> resolveInSequence() {
-    return source()
-        .subscribeOn(Schedulers.io())
-        .flatMapSingle(PersonRepo::asyncResolve);
+    return source().subscribeOn(Schedulers.io()).flatMapSingle(PersonRepo::asyncResolve);
   }
 
   private static Flowable<Person> resolveInParallel() {
@@ -31,13 +31,7 @@ public class PersonStreaming {
         .flatMapSingle(item -> PersonRepo.asyncResolve(item).subscribeOn(Schedulers.io()));
   }
 
-
   private static Flowable<String> source() {
-    return Flowable
-        .fromCallable(UUID::randomUUID)
-        .repeat()
-        .take(4).map(UUID::toString);
+    return Flowable.fromCallable(UUID::randomUUID).repeat().take(4).map(UUID::toString);
   }
-
-
 }
