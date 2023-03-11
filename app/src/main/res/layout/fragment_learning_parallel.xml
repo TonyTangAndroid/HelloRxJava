@@ -48,4 +48,25 @@
       android:layout_weight="1" />
 
   </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/ll_resolve_parallel_option_2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/btn_resolve_parallel_option_2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/resolve_parallel_option_2" />
+
+    <TextView
+      android:id="@+id/tv_cost_time_parallel_option_2"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_weight="1" />
+
+  </LinearLayout>
 </LinearLayout>

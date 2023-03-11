@@ -24,6 +24,9 @@ public class LearningParallelFragment extends Fragment {
   private TextView tv_cost_time_parallel;
   private Button btn_resolve_parallel;
 
+  private TextView tv_cost_time_parallel_option_2;
+  private Button btn_resolve_parallel_option_2;
+
   public static LearningParallelFragment newInstance() {
     return new LearningParallelFragment();
   }
@@ -57,6 +60,10 @@ public class LearningParallelFragment extends Fragment {
         tv_cost_time_parallel.setText(formattedDuration(result));
         enableButton(btn_resolve_parallel);
         break;
+      case PARALLEL_2:
+        tv_cost_time_parallel_option_2.setText(formattedDuration(result));
+        enableButton(btn_resolve_parallel_option_2);
+        break;
       case SEQUENCE:
         tv_cost_time_in_sequence.setText(formattedDuration(result));
         enableButton(btn_resolve_in_sequence);
@@ -74,15 +81,21 @@ public class LearningParallelFragment extends Fragment {
   }
 
   private int originalTextId(Button button) {
-    return button.getId() == R.id.btn_resolve_in_sequence
-        ? R.string.resolve_in_sequence
-        : R.string.resolve_parallel;
+    if (button.getId() == R.id.btn_resolve_in_sequence) {
+      return R.string.resolve_in_sequence;
+    } else if (button.getId() == R.id.btn_resolve_parallel) {
+      return R.string.resolve_parallel;
+    } else {
+
+      return R.string.resolve_parallel_option_2;
+    }
   }
 
   private Observable<ResolveAction> resolveActionStream() {
     return Observable.merge(
         resolve(btn_resolve_in_sequence, ResolveType.SEQUENCE),
-        resolve(btn_resolve_parallel, ResolveType.PARALLEL));
+        resolve(btn_resolve_parallel, ResolveType.PARALLEL),
+        resolve(btn_resolve_parallel_option_2, ResolveType.PARALLEL_2));
   }
 
   private Observable<ResolveAction> resolve(Button button, ResolveType type) {
@@ -102,5 +115,8 @@ public class LearningParallelFragment extends Fragment {
 
     tv_cost_time_in_sequence = view.findViewById(R.id.tv_cost_time_in_sequence);
     btn_resolve_parallel = view.findViewById(R.id.btn_resolve_parallel);
+
+    tv_cost_time_parallel_option_2 = view.findViewById(R.id.tv_cost_time_parallel_option_2);
+    btn_resolve_parallel_option_2 = view.findViewById(R.id.btn_resolve_parallel_option_2);
   }
 }
