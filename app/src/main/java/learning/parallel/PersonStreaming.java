@@ -3,6 +3,7 @@ package learning.parallel;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 import java.util.UUID;
 
 public class PersonStreaming {
@@ -10,12 +11,15 @@ public class PersonStreaming {
   private PersonStreaming() {}
 
   public static Single<ResolveResult> resolve(ResolveAction action) {
-    return flowable(action)
-        .toList()
-        .map(
-            list ->
-                new ResolveResult(
-                    new Span(action.startTime, System.currentTimeMillis()), action.type, list));
+    return flowable(action).toList().map(list -> resolveResult(action, list));
+  }
+
+  private static ResolveResult resolveResult(ResolveAction action, List<Person> list) {
+    return new ResolveResult(span(action), action.type, list);
+  }
+
+  private static Span span(ResolveAction action) {
+    return new Span(action.startTime, System.currentTimeMillis());
   }
 
   private static Flowable<Person> flowable(ResolveAction action) {
