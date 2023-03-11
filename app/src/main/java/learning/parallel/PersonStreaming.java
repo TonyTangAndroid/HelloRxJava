@@ -23,7 +23,16 @@ public class PersonStreaming {
   }
 
   private static Flowable<Person> flowable(ResolveAction action) {
-    return action.type.equals(ResolveType.SEQUENCE) ? resolveInSequence() : resolveInParallel();
+    ResolveType type = action.type;
+    switch (type) {
+      case PARALLEL:
+        return resolveInParallel();
+      case PARALLEL_2:
+        return resolveInParallel2();
+      case SEQUENCE:
+      default:
+        return resolveInSequence();
+    }
   }
 
   /**
@@ -47,6 +56,18 @@ public class PersonStreaming {
   private static Flowable<Person> resolveInParallel() {
     return source()
         .flatMapSingle(item -> PersonRepo.asyncResolve(item).subscribeOn(Schedulers.io()));
+  }
+
+  private static Flowable<Person> resolveInParallel2() {
+    return source()
+        .parallel(10)
+        .runOn(Schedulers.io())
+        .flatMap(PersonStreaming::asyncResolve)
+        .sequential();
+  }
+
+  private static Flowable<Person> asyncResolve(String item) {
+    return PersonRepo.asyncResolve(item).toFlowable();
   }
 
   private static Flowable<String> source() {

@@ -2,5 +2,6 @@
   <string name="app_name">HelloAgainRxJava</string>
   <string name="resolve_parallel">Resolve in parallel</string>
   <string name="resolve_in_sequence">Resolve in sequence</string>
+  <string name="resolve_parallel_option_2">Resolve in parallel 2</string>
   <string name="resolving">Resolving</string>
 </resources>
