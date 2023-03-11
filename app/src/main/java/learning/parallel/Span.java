@@ -11,7 +11,6 @@ public class Span {
   }
 
   public long duration() {
-    return endTime- startTime ;
+    return endTime - startTime;
   }
-
 }

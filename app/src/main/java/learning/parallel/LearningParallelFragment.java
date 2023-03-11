@@ -18,7 +18,6 @@ import java.util.Locale;
 
 public class LearningParallelFragment extends Fragment {
 
-
   private TextView tv_cost_time_in_sequence;
   private Button btn_resolve_in_sequence;
 
@@ -42,11 +41,11 @@ public class LearningParallelFragment extends Fragment {
 
   private void bindAction() {
     bindResolveAction();
-
   }
 
   private void bindResolveAction() {
-    resolveActionStream().flatMapSingle(PersonStreaming::resolve)
+    resolveActionStream()
+        .flatMapSingle(PersonStreaming::resolve)
         .observeOn(AndroidSchedulers.mainThread())
         .as(autoDisposable(from(getViewLifecycleOwner())))
         .subscribe(this::onActionResolved);
@@ -69,14 +68,14 @@ public class LearningParallelFragment extends Fragment {
     return String.format(Locale.US, "duration:%s ms", result.span.duration());
   }
 
-
   private void enableButton(Button button) {
     button.setEnabled(true);
     button.setText(originalTextId(button));
   }
 
   private int originalTextId(Button button) {
-    return button.getId() == R.id.btn_resolve_in_sequence ? R.string.resolve_in_sequence
+    return button.getId() == R.id.btn_resolve_in_sequence
+        ? R.string.resolve_in_sequence
         : R.string.resolve_parallel;
   }
 
@@ -87,7 +86,8 @@ public class LearningParallelFragment extends Fragment {
   }
 
   private Observable<ResolveAction> resolve(Button button, ResolveType type) {
-    return RxView.clicks(button).map(unit -> ResolveAction.create(type))
+    return RxView.clicks(button)
+        .map(unit -> ResolveAction.create(type))
         .doOnNext(action -> disableButton(button));
   }
 

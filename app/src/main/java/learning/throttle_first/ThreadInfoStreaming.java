@@ -8,8 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadInfoStreaming {
 
-  private ThreadInfoStreaming() {
-  }
+  private ThreadInfoStreaming() {}
 
   public static Observable<ThreadInfo> eventStreaming() {
     return Observable.merge(throttleFirst(), throttleLast());
@@ -18,15 +17,13 @@ public class ThreadInfoStreaming {
   private static Observable<ThreadInfo> throttleFirst() {
     return rawStream()
         .throttleFirst(1, TimeUnit.SECONDS)
-        .map(iteration -> new ThreadInfo(iteration, Source.THROTTLE_FIRST,
-            currentThreadName()));
+        .map(iteration -> new ThreadInfo(iteration, Source.THROTTLE_FIRST, currentThreadName()));
   }
 
   private static Observable<ThreadInfo> throttleLast() {
     return rawStream()
         .throttleLast(1, TimeUnit.SECONDS)
-        .map(iteration -> new ThreadInfo(iteration, Source.THROTTLE_LAST,
-            currentThreadName()));
+        .map(iteration -> new ThreadInfo(iteration, Source.THROTTLE_LAST, currentThreadName()));
   }
 
   private static String currentThreadName() {

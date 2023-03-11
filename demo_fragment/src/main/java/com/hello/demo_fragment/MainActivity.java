@@ -1,7 +1,7 @@
 package com.hello.demo_fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import com.hello.demo_fragment.ui.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction()
+      getSupportFragmentManager()
+          .beginTransaction()
           .replace(R.id.container, MainFragment.newInstance())
           .commitNow();
     }

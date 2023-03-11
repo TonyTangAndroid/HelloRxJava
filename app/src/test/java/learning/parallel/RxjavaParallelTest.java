@@ -14,48 +14,39 @@ public class RxjavaParallelTest {
 
   @Test
   public void addition_isCorrect() {
-    Flowable<UUID> ids = Flowable
-        .fromCallable(UUID::randomUUID)
-        .repeat()
-        .take(100);
+    Flowable<UUID> ids = Flowable.fromCallable(UUID::randomUUID).repeat().take(100);
 
-    Flowable<Person> people = ids
-        .subscribeOn(Schedulers.io())
-        .map(id -> slowLoadBy(id));
+    Flowable<Person> people = ids.subscribeOn(Schedulers.io()).map(id -> slowLoadBy(id));
 
-//    ids.subscribe(this::slowLoadBy);
+    //    ids.subscribe(this::slowLoadBy);
 
   }
 
   @Test
   public void broken4() {
-    Flowable<UUID> ids = Flowable
-        .fromCallable(UUID::randomUUID)
-        .repeat()
-        .take(100);
+    Flowable<UUID> ids = Flowable.fromCallable(UUID::randomUUID).repeat().take(100);
 
-    Flowable<Person> people = ids
-        .subscribeOn(Schedulers.io())
-        .flatMap(id -> asyncLoadBy(id)); //BROKEN
-
+    Flowable<Person> people =
+        ids.subscribeOn(Schedulers.io()).flatMap(id -> asyncLoadBy(id)); // BROKEN
   }
 
   @Test
   public void broken5() {
     log.info("Setup");
-    Flowable<String> blocking = Flowable
-        .fromCallable(() -> {
-          log.info("Customized thread name 2:" + Thread.currentThread().getName());
-          log.info("Starting");
-          TimeUnit.SECONDS.sleep(1);
-          log.info("Done");
-          return "Hello, world!";
-        }).subscribeOn(Schedulers.io());
+    Flowable<String> blocking =
+        Flowable.fromCallable(
+                () -> {
+                  log.info("Customized thread name 2:" + Thread.currentThread().getName());
+                  log.info("Starting");
+                  TimeUnit.SECONDS.sleep(1);
+                  log.info("Done");
+                  return "Hello, world!";
+                })
+            .subscribeOn(Schedulers.io());
     log.info("Created");
     log.info("Customized thread name 1:" + Thread.currentThread().getName());
     blocking.subscribe(s -> log.info("Received {}", s));
     log.info("Done");
-
   }
 
   Flowable<Person> asyncLoadBy(UUID id) {
@@ -65,6 +56,4 @@ public class RxjavaParallelTest {
   Person slowLoadBy(UUID id) {
     return new Person(id.toString());
   }
-
-
 }

@@ -1,9 +1,8 @@
 package com.hello.demo.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
-
 import com.hello.demo.data.LoginDataSource;
 import com.hello.demo.data.LoginRepository;
 

@@ -1,14 +1,13 @@
 package com.hello.demo.ui.login;
 
+import android.util.Patterns;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import android.util.Patterns;
-
+import com.hello.demo.R;
 import com.hello.demo.data.LoginRepository;
 import com.hello.demo.data.Result;
 import com.hello.demo.data.model.LoggedInUser;
-import com.hello.demo.R;
 
 public class LoginViewModel extends ViewModel {
 

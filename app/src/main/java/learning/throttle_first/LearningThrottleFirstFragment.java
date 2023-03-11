@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.tonytang.hello.again.rxjava.R;
 import com.tonytang.hello.again.rxjava.ThreadInfo;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import learning.parallel.LearningParallelFragment;
 
 public class LearningThrottleFirstFragment extends Fragment {
 
@@ -22,6 +21,7 @@ public class LearningThrottleFirstFragment extends Fragment {
   public LearningThrottleFirstFragment() {
     super(R.layout.fragment_learning_throttle_first);
   }
+
   public static LearningThrottleFirstFragment newInstance() {
     return new LearningThrottleFirstFragment();
   }
@@ -45,7 +45,6 @@ public class LearningThrottleFirstFragment extends Fragment {
         .subscribe(this::renderUI);
   }
 
-
   private void renderUI(ThreadInfo threadInfo) {
     switch (threadInfo.source) {
       case THROTTLE_FIRST:
@@ -56,6 +55,4 @@ public class LearningThrottleFirstFragment extends Fragment {
         break;
     }
   }
-
-
 }
